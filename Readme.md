@@ -12,7 +12,7 @@ A sleek and responsive MERN stack web application that displays real-time weathe
 
 📦 Setup Instructions
 🔧 Backend
-bash
+
 Copy
 Edit
 cd server
