@@ -1,4 +1,4 @@
-# Real-Time Weather Dashboard 🌦️
+# Afford Medical: Real-Time Weather Dashboard 🌦️
 
 A modern weather dashboard built with the MERN stack (MongoDB, Express, React, Node.js) that provides real-time weather information for any city. Uses OpenWeatherMap API for weather data.
 
