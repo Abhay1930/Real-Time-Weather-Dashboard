@@ -1,0 +1,13 @@
+{
+    "name": "weather-dashboard",
+    "version": "1.0.0",
+    "description": "Real-Time Weather Dashboard",
+    "main": "server/server.js",
+    "scripts": {
+      "start": "cd server && npm install && node server.js",
+      "build": "cd server && npm install"
+    },
+    "engines": {
+      "node": ">=14.0.0"
+    }
+  }
