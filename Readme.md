@@ -1,45 +1,120 @@
-🌦️ Real-Time Weather Dashboard
-A sleek and responsive MERN stack web application that displays real-time weather information for any city using the OpenWeatherMap API.
+# Real-Time Weather Dashboard 🌦️
 
-🚀 Features
-🌍 Search weather by city name
+A modern weather dashboard built with the MERN stack (MongoDB, Express, React, Node.js) that provides real-time weather information for any city. Uses OpenWeatherMap API for weather data.
 
-📊 Real-time temperature, humidity, wind speed & condition
+## ✨ Features
 
-⚡ Fast and lightweight UI with live data updates
+- 🔍 Search weather by city name
+- 🌡️ Real-time weather updates
+- 📊 Detailed weather information (temperature, humidity, wind speed)
+- 🌙 Dark/Light theme toggle
+- 📱 Responsive design for all devices
+- 🔄 Auto-loads last searched city
+- 🎯 Error handling and loading states
 
-🧩 Built with React, Node.js, Express & MongoDB
+## 🚀 Live Demo
 
-📦 Setup Instructions
-🔧 Backend
+- Frontend: [https://real-time-weather-dashboard-dun.vercel.app/](https://real-time-weather-dashboard-six.vercel.app/)
+- Backend: [https://real-time-weather-dashboard.onrender.com](https://real-time-weather-dashboard.onrender.com/)
 
-Copy
-Edit
+## 🛠️ Setup Instructions
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+- OpenWeatherMap API key ([Get it here](https://openweathermap.org/api))
+
+### Backend Setup
+
+1. Navigate to server directory:
+```bash
 cd server
-npm install
-Create a .env file in the server directory and add your API key:
+```
 
-ini
-Copy
-Edit
-OPENWEATHER_API_KEY=your_api_key_here
-Start the backend server:
-
-bash
-Copy
-Edit
-node server.js
-💻 Frontend
-bash
-Copy
-Edit
-cd client
+2. Install dependencies:
+```bash
 npm install
+```
+
+3. Create a `.env` file in the server directory:
+```env
+PORT=5000
+WEATHER_API_KEY=your_openweathermap_api_key
+```
+
+4. Start the server:
+```bash
 npm start
-🔗 API Endpoint
-GET /weather?city=cityName
-Returns current weather data for the given city.
-Powered by: OpenWeatherMap API
+```
+
+Server will run on `http://localhost:5000`
+
+### Frontend Setup
+
+1. Navigate to client directory:
+```bash
+cd client
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Create a `.env` file in the client directory:
+```env
+REACT_APP_API_URL=http://localhost:5000
+```
+
+4. Start the development server:
+```bash
+npm start
+```
+
+Frontend will run on `http://localhost:3000`
+
+## 📁 Project Structure
+
+```
+weather-dashboard/
+├── client/                 # Frontend React application
+│   ├── public/            # Public assets
+│   └── src/
+│       ├── components/    # React components
+│       ├── App.js         # Main application component
+│       └── App.css        # Main styles
+└── server/                # Backend Node.js application
+    ├── routes/            # API routes
+    └── server.js          # Server configuration
+```
+
+## 🔌 API Endpoints
+
+- `GET /weather?city={cityName}` - Get current weather
+- `GET /weather/forecast?city={cityName}` - Get 5-day forecast
+
+## 🎨 Technologies Used
+
+### Frontend
+- React.js
+- Axios for API requests
+- CSS3 for styling
+- React Hooks for state management
+
+### Backend
+- Node.js
+- Express.js
+- Axios for OpenWeatherMap API calls
+- CORS for cross-origin requests
+
+
+## 🙏 Acknowledgments
+
+- OpenWeatherMap API for weather data
+- Icons from [Weather Icons](https://openweathermap.org/weather-conditions)
+- Deployed using Vercel (frontend) and Render (backend)
+
 
 📸 Preview
 
