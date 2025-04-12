@@ -39,7 +39,12 @@ npm start
 🔗 API Endpoint
 GET /weather?city=cityName
 Returns current weather data for the given city.
-
 Powered by: OpenWeatherMap API
 
 📸 Preview
+
+
+
+
+
+![Screenshot 2025-04-12 151424](https://github.com/user-attachments/assets/2b46957c-bed6-4da2-9b40-149add9e7f5b)
