@@ -34,14 +34,14 @@ function App() {
 
     try {
       // First, get the current weather for the city
-      const currentWeatherURL = `http://localhost:10000/weather?city=${city}`;
+      const currentWeatherURL = `https://real-time-weather-dashboard.onrender.com/weather?city=${city}`;
       const weatherResponse = await axios.get(currentWeatherURL);
 
       // Update state with current weather data
       setWeatherData(weatherResponse.data);
 
       // Next, get the 5-day forecast for the city
-      const forecastURL = `http://localhost:10000/weather/forecast?city=${city}`;
+      const forecastURL = `https://real-time-weather-dashboard.onrender.com/weather/forecast?city=${city}`;
       const forecastResponse = await axios.get(forecastURL);
 
       // Update state with forecast data
