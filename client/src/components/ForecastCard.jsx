@@ -1,59 +1,99 @@
 import React from 'react';
 
+// Component to display 5-day weather forecast
 const ForecastCard = ({ forecastData }) => {
+  // Return null if no data is available
   if (!forecastData || !forecastData.length) {
     return null;
   }
 
-  // Group forecast data by day
-  const groupedByDay = forecastData.reduce((acc, item) => {
-    const date = new Date(item.dt * 1000);
-    const day = date.toLocaleDateString('en-US', { weekday: 'short' });
-    
-    if (!acc[day]) {
-      acc[day] = [];
-    }
-    
-    acc[day].push(item);
-    return acc;
-  }, {});
+  // My function to organize forecast data by day
+  function organizeByDay(data) {
+    let result = {};
 
-  // Get the average temperature and most frequent weather condition for each day
-  const dailyForecast = Object.keys(groupedByDay).map(day => {
+    // Loop through each forecast item
+    data.forEach(item => {
+      // Convert timestamp to date
+      let itemDate = new Date(item.dt * 1000);
+      let weekday = itemDate.toLocaleDateString('en-US', { weekday: 'short' });
+
+      // Create array for this day if it doesn't exist
+      if (!result[weekday]) {
+        result[weekday] = [];
+      }
+
+      // Add this forecast to the day's array
+      result[weekday].push(item);
+    });
+
+    return result;
+  }
+
+  // Group the forecast data by day
+  const groupedByDay = organizeByDay(forecastData);
+
+  // Process each day's data
+  const dailyForecast = [];
+
+  // Process each day's data to get summary information
+  for (const day in groupedByDay) {
     const dayData = groupedByDay[day];
-    
-    // Calculate average temperature
-    const avgTemp = dayData.reduce((sum, item) => sum + item.main.temp, 0) / dayData.length;
-    
-    // Find most frequent weather condition
-    const weatherCounts = dayData.reduce((counts, item) => {
-      const weather = item.weather[0].main;
-      counts[weather] = (counts[weather] || 0) + 1;
-      return counts;
-    }, {});
-    
-    const mostFrequentWeather = Object.keys(weatherCounts).reduce((a, b) => 
-      weatherCounts[a] > weatherCounts[b] ? a : b
-    );
-    
-    // Get icon for the most frequent weather
-    const icon = dayData.find(item => item.weather[0].main === mostFrequentWeather).weather[0].icon;
-    
-    // Get the date
-    const date = new Date(dayData[0].dt * 1000);
-    
-    return {
-      day,
-      date: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-      avgTemp: Math.round(avgTemp),
-      weather: mostFrequentWeather,
-      icon: `http://openweathermap.org/img/wn/${icon}@2x.png`,
-      minTemp: Math.round(Math.min(...dayData.map(item => item.main.temp_min))),
-      maxTemp: Math.round(Math.max(...dayData.map(item => item.main.temp_max)))
-    };
-  });
 
-  // Limit to 5 days
+    // Calculate average temperature for the day
+    let tempSum = 0;
+    dayData.forEach(item => {
+      tempSum += item.main.temp;
+    });
+    const avgTemp = tempSum / dayData.length;
+
+    // Find the most common weather condition
+    const weatherTypes = {};
+    dayData.forEach(item => {
+      const condition = item.weather[0].main;
+      weatherTypes[condition] = (weatherTypes[condition] || 0) + 1;
+    });
+
+    // Find which weather condition appears most often
+    let mostCommonWeather = '';
+    let highestCount = 0;
+
+    for (const weather in weatherTypes) {
+      if (weatherTypes[weather] > highestCount) {
+        mostCommonWeather = weather;
+        highestCount = weatherTypes[weather];
+      }
+    }
+
+    // Get weather icon for the most common condition
+    const weatherItem = dayData.find(item => item.weather[0].main === mostCommonWeather);
+    const icon = weatherItem.weather[0].icon;
+
+    // Get min and max temperatures
+    let minTemp = dayData[0].main.temp_min;
+    let maxTemp = dayData[0].main.temp_max;
+
+    dayData.forEach(item => {
+      if (item.main.temp_min < minTemp) minTemp = item.main.temp_min;
+      if (item.main.temp_max > maxTemp) maxTemp = item.main.temp_max;
+    });
+
+    // Format the date
+    const date = new Date(dayData[0].dt * 1000);
+    const formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+    // Add this day's forecast summary to our results
+    dailyForecast.push({
+      day,
+      date: formattedDate,
+      avgTemp: Math.round(avgTemp),
+      weather: mostCommonWeather,
+      icon: `http://openweathermap.org/img/wn/${icon}@2x.png`,
+      minTemp: Math.round(minTemp),
+      maxTemp: Math.round(maxTemp)
+    });
+  }
+
+  // Make sure we only show 5 days
   const fiveDayForecast = dailyForecast.slice(0, 5);
 
   return (

@@ -1,28 +1,35 @@
-/* Global Styles */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* My custom styles for the Weather Dashboard */
 
+/* Using Roboto font for clean, modern look */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+/* Base styles */
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
-  transition: background-color 0.5s, color 0.5s;
-  line-height: 1.6;
+  padding: 0;
+  font-family: 'Roboto', Arial, sans-serif;
+  line-height: 1.5;
+  transition: all 0.4s ease;
+  box-sizing: border-box;
 }
 
-/* Theme Styles */
+/* Light theme - I prefer a subtle blue gradient for daytime feel */
 body.light {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  color: #333;
+  background: linear-gradient(120deg, #e0f7fa 0%, #bbdefb 100%);
+  color: #37474f;
 }
 
+/* Dark theme - using a deep blue gradient for nighttime feel */
 body.dark {
-  background: linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
-  color: #f5f5f5;
+  background: linear-gradient(120deg, #263238 0%, #1a237e 100%);
+  color: #eceff1;
 }
 
+/* Main container - I like to keep it centered with reasonable max-width */
 .app-container {
-  max-width: 900px;
+  max-width: 850px;
   margin: 0 auto;
-  padding: 30px 20px;
+  padding: 25px 15px;
   text-align: center;
   min-height: 100vh;
   display: flex;
@@ -30,171 +37,226 @@ body.dark {
   align-items: center;
 }
 
+/* Header section with title and theme toggle */
 .app-header {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(125, 125, 125, 0.2);
 }
 
+/* App title with custom gradient - my personal touch */
 .app-title {
-  font-size: 2.2rem;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: 600;
   margin: 0;
-  background: linear-gradient(90deg, #0077cc, #00c6ff);
+  position: relative;
+  /* Using my favorite blue-teal gradient */
+  background: linear-gradient(90deg, #0288d1, #26c6da);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.5px;
 }
 
+/* Theme toggle button - I wanted a subtle but effective design */
 .theme-toggle {
-  padding: 10px 16px;
+  padding: 8px 14px;
   border: none;
-  border-radius: 50px;
+  border-radius: 20px;
   cursor: pointer;
   font-weight: 500;
-  transition: all 0.3s;
+  font-size: 0.9rem;
+  transition: all 0.25s ease;
   display: flex;
   align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  gap: 6px;
+  /* I prefer a subtle shadow */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
+/* Light theme button styling */
 body.light .theme-toggle {
-  background-color: #2c3e50;
-  color: white;
+  background-color: #1a237e;
+  color: #fff;
 }
 
+/* Dark theme button styling */
 body.dark .theme-toggle {
-  background-color: #f5f7fa;
-  color: #2c3e50;
+  background-color: #e3f2fd;
+  color: #0d47a1;
 }
 
+/* Button hover effect - subtle lift */
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Search container - the main input area */
 .search-container {
-  margin: 20px 0 40px;
+  margin: 15px 0 35px;
   display: flex;
   justify-content: center;
   width: 100%;
-  max-width: 500px;
+  max-width: 480px;
+  position: relative;
 }
 
+/* Search input styling */
 .search-container input {
-  padding: 15px 20px;
-  border-radius: 50px 0 0 50px;
-  border: none;
+  padding: 12px 18px;
+  border-radius: 25px 0 0 25px;
+  border: 1px solid transparent;
   width: 70%;
-  font-size: 16px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   outline: none;
-  transition: all 0.3s;
+  transition: all 0.25s ease;
 }
 
+/* Input focus effect - my personal touch */
+.search-container input:focus {
+  border-color: #29b6f6;
+  box-shadow: 0 0 0 2px rgba(41, 182, 246, 0.2);
+}
+
+/* Light theme input */
 body.light .search-container input {
-  background-color: white;
-  color: #333;
+  background-color: #fff;
+  color: #37474f;
 }
 
+/* Dark theme input */
 body.dark .search-container input {
-  background-color: #2c3e50;
-  color: white;
+  background-color: #37474f;
+  color: #eceff1;
 }
 
+/* Search button styling */
 .search-container button {
-  padding: 15px 25px;
+  padding: 12px 20px;
   border: none;
-  border-radius: 0 50px 50px 0;
-  background: linear-gradient(90deg, #0077cc, #00c6ff);
+  border-radius: 0 25px 25px 0;
+  /* I like this specific gradient */
+  background: linear-gradient(90deg, #0288d1, #26c6da);
   color: white;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s ease;
 }
 
+/* Button hover effect */
 .search-container button:hover {
+  background: linear-gradient(90deg, #0277bd, #00acc1);
   transform: translateY(-2px);
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
+/* Loading spinner - I created this custom spinner with my preferred colors */
 .loading-spinner {
   display: inline-block;
-  width: 50px;
-  height: 50px;
-  border: 5px solid rgba(0, 119, 204, 0.3);
+  width: 45px;
+  height: 45px;
+  border: 4px solid rgba(2, 136, 209, 0.2);
   border-radius: 50%;
-  border-top-color: #0077cc;
-  animation: spin 1s ease-in-out infinite;
-  margin: 30px 0;
+  border-top-color: #0288d1;
+  border-bottom-color: #0288d1;
+  animation: my-spinner 1.2s linear infinite;
+  margin: 25px 0;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
+/* Custom spinner animation */
+@keyframes my-spinner {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(180deg); }
+  100% { transform: rotate(360deg); }
 }
 
+/* Error message styling - I prefer a subtle but clear error indication */
 .error-message {
-  color: #e74c3c;
-  background-color: rgba(231, 76, 60, 0.1);
-  padding: 15px 20px;
-  border-radius: 8px;
-  margin: 20px 0;
+  color: #d32f2f;
+  background-color: rgba(211, 47, 47, 0.08);
+  padding: 12px 18px;
+  border-radius: 6px;
+  border-left: 3px solid #d32f2f;
+  margin: 15px 0;
   font-weight: 500;
-  max-width: 500px;
+  font-size: 0.95rem;
+  max-width: 480px;
   width: 100%;
+  text-align: left;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
+/* Weather card - main container for current weather */
 .weather-card {
-  margin-top: 20px;
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s;
+  margin-top: 15px;
+  padding: 25px;
+  border-radius: 16px;
+  /* I prefer a subtle shadow with slight offset */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
   width: 100%;
-  max-width: 600px;
+  max-width: 550px;
   position: relative;
   overflow: hidden;
 }
 
+/* Light theme card styling */
 body.light .weather-card {
-  background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #e1f5fe 100%);
+  border: 1px solid rgba(200, 200, 200, 0.3);
 }
 
+/* Dark theme card styling */
 body.dark .weather-card {
-  background: linear-gradient(135deg, #3a4750 0%, #2c3e50 100%);
+  background: linear-gradient(135deg, #37474f 0%, #263238 100%);
+  border: 1px solid rgba(30, 30, 30, 0.3);
 }
 
+/* Decorative circle element - my personal touch */
 .weather-card::before {
   content: '';
   position: absolute;
-  top: -50px;
-  right: -50px;
-  width: 150px;
-  height: 150px;
+  top: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  background: rgba(0, 119, 204, 0.1);
+  background: rgba(2, 136, 209, 0.08);
   z-index: 0;
 }
 
+/* City name heading */
 .city-name {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 10px;
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
   position: relative;
   z-index: 1;
+  /* Adding a subtle text shadow for better readability */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
+/* Weather icon */
 .weather-card img {
-  width: 120px;
-  height: 120px;
-  margin: 10px 0;
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+  width: 110px;
+  height: 110px;
+  margin: 5px 0;
+  /* Custom drop shadow for the icon */
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.15));
   position: relative;
   z-index: 1;
 }
 
+/* Weather info container */
 .weather-info {
   display: flex;
   flex-direction: column;
@@ -203,202 +265,317 @@ body.dark .weather-card {
   z-index: 1;
 }
 
+/* Weather condition text */
 .weather-condition {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 500;
-  margin: 5px 0 15px;
+  margin: 5px 0 12px;
   text-transform: capitalize;
+  /* Adding a subtle opacity */
+  opacity: 0.9;
 }
 
+/* Temperature display */
 .temperature {
-  font-size: 3.5rem;
+  font-size: 3.2rem;
   font-weight: 700;
-  margin: 10px 0;
-  background: linear-gradient(90deg, #0077cc, #00c6ff);
+  margin: 8px 0;
+  /* My custom gradient for temperature */
+  background: linear-gradient(90deg, #0288d1, #26c6da);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  /* Adding a subtle text shadow for better visibility */
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
+/* Weather details section */
 .weather-details {
   display: flex;
   justify-content: space-around;
   width: 100%;
-  margin-top: 30px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 20px;
-  backdrop-filter: blur(5px);
+  margin-top: 25px;
+  /* Semi-transparent background */
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 18px;
+  /* Adding a subtle border */
+  border: 1px solid rgba(200, 200, 200, 0.1);
 }
 
+/* Individual weather detail item */
 .weather-detail-item {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 15px;
 }
 
+/* Detail label */
 .detail-label {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
-  margin-bottom: 5px;
-  opacity: 0.8;
+  margin-bottom: 4px;
+  opacity: 0.75;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
+/* Detail value */
 .detail-value {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 600;
+  /* Adding a subtle text shadow */
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 
 
-/* Weather Content Layout */
+/* Main weather content layout */
 .weather-content {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  gap: 25px;
 }
 
-/* Forecast Styles */
+/* 5-day forecast container */
 .forecast-container {
   width: 100%;
-  max-width: 600px;
-  margin-top: 10px;
-  padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s;
+  max-width: 550px;
+  margin-top: 15px;
+  padding: 22px;
+  border-radius: 16px;
+  /* Matching the main card shadow style */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
 }
 
+/* Light theme forecast container */
 body.light .forecast-container {
-  background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #e1f5fe 100%);
+  border: 1px solid rgba(200, 200, 200, 0.3);
 }
 
+/* Dark theme forecast container */
 body.dark .forecast-container {
-  background: linear-gradient(135deg, #3a4750 0%, #2c3e50 100%);
+  background: linear-gradient(135deg, #37474f 0%, #263238 100%);
+  border: 1px solid rgba(30, 30, 30, 0.3);
 }
 
+/* Forecast section title */
 .forecast-title {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   text-align: left;
+  /* Adding a subtle underline */
+  border-bottom: 1px solid rgba(125, 125, 125, 0.15);
+  padding-bottom: 8px;
 }
 
+/* Forecast cards container - horizontal scrolling */
 .forecast-cards {
   display: flex;
   justify-content: space-between;
   overflow-x: auto;
-  padding: 10px 0;
-  gap: 15px;
+  padding: 8px 0;
+  gap: 12px;
+  /* Hide scrollbar but keep functionality */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 136, 209, 0.5) transparent;
 }
 
+/* Custom scrollbar styling */
+.forecast-cards::-webkit-scrollbar {
+  height: 6px;
+}
+
+.forecast-cards::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.forecast-cards::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 136, 209, 0.5);
+  border-radius: 20px;
+}
+
+/* Individual day forecast card */
 .forecast-day-card {
-  min-width: 100px;
-  padding: 15px 10px;
-  border-radius: 15px;
+  min-width: 95px;
+  padding: 12px 8px;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: all 0.3s;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(5px);
+  transition: all 0.25s ease;
+  /* Semi-transparent background */
+  background: rgba(255, 255, 255, 0.08);
+  /* Adding a subtle border */
+  border: 1px solid rgba(200, 200, 200, 0.1);
 }
 
+/* Hover effect for day cards */
 .forecast-day-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Day of week text */
 .forecast-day {
   font-weight: 600;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
+  font-size: 0.95rem;
 }
 
+/* Date display */
 .forecast-date {
-  font-size: 0.8rem;
-  opacity: 0.8;
-  margin-bottom: 10px;
+  font-size: 0.75rem;
+  opacity: 0.75;
+  margin-bottom: 8px;
 }
 
+/* Weather icon for forecast */
 .forecast-icon {
-  width: 50px;
-  height: 50px;
-  margin: 5px 0;
+  width: 45px;
+  height: 45px;
+  margin: 4px 0;
+  /* Adding a subtle drop shadow */
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.1));
 }
 
+/* Temperature display */
 .forecast-temp {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  margin: 5px 0;
+  margin: 4px 0;
+  /* Adding a subtle text shadow */
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 
+/* Min/max temperature container */
 .forecast-min-max {
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 0.9rem;
+  gap: 4px;
+  font-size: 0.8rem;
   opacity: 0.8;
+  margin-top: 2px;
 }
 
+/* Separator between min and max temps */
 .forecast-temp-separator {
-  height: 10px;
+  height: 8px;
   width: 1px;
   background-color: currentColor;
-  opacity: 0.5;
-  margin: 0 5px;
+  opacity: 0.4;
+  margin: 0 4px;
 }
 
-/* Responsive adjustments */
+/* My responsive design adjustments */
 @media (max-width: 768px) {
+  /* Header adjustments for mobile */
+  .app-header {
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 12px;
+  }
+
+  /* Smaller title on mobile */
   .app-title {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
 
+  /* Position theme toggle button */
+  .theme-toggle {
+    position: static;
+    margin-bottom: 5px;
+  }
+
+  /* Smaller city name on mobile */
   .city-name {
-    font-size: 2rem;
+    font-size: 1.9rem;
   }
 
+  /* Smaller temperature on mobile */
   .temperature {
-    font-size: 3rem;
+    font-size: 2.8rem;
   }
 
+  /* Stack weather details vertically on mobile */
   .weather-details {
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
+    padding: 15px;
   }
 
+  /* Arrange detail items horizontally on mobile */
   .weather-detail-item {
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+    padding: 5px 10px;
   }
 
+  /* Adjust detail labels on mobile */
   .detail-label {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 0;
   }
 
+  /* Adjust detail values on mobile */
   .detail-value {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
-  .app-header {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .theme-toggle {
-    position: static;
-  }
-
+  /* Ensure forecast cards scroll properly on mobile */
   .forecast-cards {
     justify-content: flex-start;
+    padding: 5px 0;
   }
 
+  /* Slightly smaller forecast cards on mobile */
   .forecast-day-card {
-    min-width: 90px;
+    min-width: 85px;
+    padding: 10px 6px;
+  }
+
+  /* Smaller forecast icons on mobile */
+  .forecast-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Smaller forecast temperature on mobile */
+  .forecast-temp {
+    font-size: 1.2rem;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  /* Further reduce padding on small screens */
+  .app-container {
+    padding: 15px 10px;
+  }
+
+  /* Smaller weather card padding on small screens */
+  .weather-card, .forecast-container {
+    padding: 18px 15px;
+  }
+
+  /* Smaller search input on small screens */
+  .search-container input {
+    font-size: 0.9rem;
+    padding: 10px 15px;
+  }
+
+  /* Smaller search button on small screens */
+  .search-container button {
+    font-size: 0.9rem;
+    padding: 10px 15px;
   }
 }

@@ -5,40 +5,63 @@ import WeatherCard from './components/WeatherCard';
 import ForecastCard from './components/ForecastCard';
 import './App.css';
 
+// Main App component
 function App() {
-  const [weatherData, setWeatherData] = useState(null);
-  const [forecastData, setForecastData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [theme, setTheme] = useState('light');
+  // State variables for our application
+  const [weatherData, setWeatherData] = useState(null);  // Current weather data
+  const [forecastData, setForecastData] = useState(null); // Forecast data
+  const [loading, setLoading] = useState(false);          // Loading state
+  const [error, setError] = useState('');                 // Error messages
+  const [theme, setTheme] = useState('light');            // Theme (light/dark)
 
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    document.body.className = newTheme;
-  };
+  // Function to toggle between light and dark themes
+  function toggleTheme() {
+    // If current theme is light, switch to dark, otherwise switch to light
+    if (theme === 'light') {
+      setTheme('dark');
+      document.body.className = 'dark';
+    } else {
+      setTheme('light');
+      document.body.className = 'light';
+    }
+  }
 
-  const fetchWeather = async (city) => {
+  // Function to fetch weather data from our API
+  async function fetchWeather(city) {
+    // Show loading indicator and clear any previous errors
     setLoading(true);
     setError('');
+
     try {
-      // Fetch current weather
-      const weatherRes = await axios.get(`http://localhost:5000/weather?city=${city}`);
-      setWeatherData(weatherRes.data);
+      // First, get the current weather for the city
+      const currentWeatherURL = `http://localhost:10000/weather?city=${city}`;
+      const weatherResponse = await axios.get(currentWeatherURL);
 
-      // Fetch forecast data
-      const forecastRes = await axios.get(`http://localhost:5000/weather/forecast?city=${city}`);
-      setForecastData(forecastRes.data.list);
+      // Update state with current weather data
+      setWeatherData(weatherResponse.data);
 
+      // Next, get the 5-day forecast for the city
+      const forecastURL = `http://localhost:10000/weather/forecast?city=${city}`;
+      const forecastResponse = await axios.get(forecastURL);
+
+      // Update state with forecast data
+      setForecastData(forecastResponse.data.list);
+
+      // Save the city in localStorage for future visits
       localStorage.setItem('lastCity', city);
     } catch (err) {
-      setError(err.response?.data?.error || 'Something went wrong');
+      // Handle any errors that occur during the API calls
+      const errorMessage = err.response?.data?.error || 'Something went wrong';
+      setError(errorMessage);
+
+      // Clear any previous weather data
       setWeatherData(null);
       setForecastData(null);
     } finally {
+      // Hide loading indicator when done
       setLoading(false);
     }
-  };
+  }
 
   useEffect(() => {
     const lastCity = localStorage.getItem('lastCity');
@@ -50,25 +73,39 @@ function App() {
     document.body.className = theme;
   }, [theme]);
 
+  // Render the application UI
   return (
     <div className="app-container">
-      <div className="app-header">
-        <h1 className="app-title">Real-Time Weather Dashboard</h1>
+      {/* Header section with title and theme toggle */}
+      <header className="app-header">
+        <h1 className="app-title">My Weather Dashboard</h1>
         <button className="theme-toggle" onClick={toggleTheme}>
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'} Mode
+          {/* Show different icon based on current theme */}
+          {theme === 'light' ? '🌙 Switch to Dark' : '☀️ Switch to Light'}
         </button>
-      </div>
+      </header>
 
+      {/* Search bar component */}
       <SearchBar onSearch={fetchWeather} />
 
-      {loading && <div className="loading-spinner"></div>}
+      {/* Show loading spinner when fetching data */}
+      {loading && (
+        <div className="loading-spinner" aria-label="Loading weather data"></div>
+      )}
 
-      {error && <div className="error-message">{error}</div>}
+      {/* Show error message if something went wrong */}
+      {error && (
+        <div className="error-message" role="alert">{error}</div>
+      )}
 
-      <div className="weather-content">
+      {/* Weather content section */}
+      <main className="weather-content">
+        {/* Current weather card */}
         {weatherData && <WeatherCard weatherData={weatherData} />}
+
+        {/* 5-day forecast */}
         {forecastData && <ForecastCard forecastData={forecastData} />}
-      </div>
+      </main>
     </div>
   );
 }
